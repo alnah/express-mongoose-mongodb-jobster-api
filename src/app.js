@@ -6,8 +6,6 @@ const cors = require("cors");
 const rateLimiter = require("express-rate-limit");
 const helmet = require("helmet");
 const xssClean = require("xss-clean");
-const swaggerUi = require("swagger-ui-express");
-const yaml = require("yamljs");
 
 const authRoutes = require("./routes/auth");
 const jobsRoutes = require("./routes/jobs");
@@ -21,8 +19,6 @@ const connectDb = require("./db/connect");
 const app = express();
 const port = process.env.PORT || 3000;
 const uri = process.env.MONGO_URI;
-
-const swaggerDoc = yaml.load("./swagger.yaml");
 
 // trust proxy
 app.enable("trust proxy");
@@ -44,10 +40,6 @@ app.use(cors());
 app.use(xssClean());
 
 // routes
-app.get("/", (req, res) => {
-  res.send("<h1>Jobs API</h1><a href='api-docs'>Documentation</a>");
-});
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/jobs", authUserMiddleware, jobsRoutes);
 
