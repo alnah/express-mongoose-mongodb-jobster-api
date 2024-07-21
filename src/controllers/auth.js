@@ -42,4 +42,9 @@ const login = async (req, res, next) => {
   });
 };
 
-module.exports = { register, login };
+const updateUser = (req, res) => {
+  console.log("req.user:", req.user);
+  console.log("req.body:", req.body);
+};
+
+module.exports = { register, login, updateUser };
