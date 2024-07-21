@@ -1,0 +1,41 @@
+{
+  "name": "express-mongoose-mongodb-jobs-api",
+  "version": "1.0.0",
+  "description": "An Express.js app implementing a JSON web token for authentication, and using MongoDB together with Mongoose.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "clear && nodemon ./src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "express-mongoose-mongodb-jobs-api"
+  },
+  "author": "alnah <alexis.nahan@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-prettier": "^5.2.1",
+    "nodemon": "^3.1.4",
+    "prettier": "^3.3.3"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-async-errors": "^3.1.1",
+    "express-rate-limit": "^7.3.1",
+    "helmet": "^7.1.0",
+    "http-status-codes": "^2.3.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.5.1",
+    "swagger-ui-express": "^5.0.1",
+    "validator": "^13.12.0",
+    "xss-clean": "^0.1.4",
+    "yamljs": "^0.3.0"
+  }
+}
