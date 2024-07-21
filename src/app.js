@@ -2,7 +2,6 @@ require("dotenv").config();
 require("express-async-errors");
 
 const express = require("express");
-const cors = require("cors");
 const helmet = require("helmet");
 const xssClean = require("xss-clean");
 
@@ -27,7 +26,6 @@ app.use(express.json());
 
 // security
 app.use(helmet());
-app.use(cors());
 app.use(xssClean());
 
 // routes
