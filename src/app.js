@@ -1,3 +1,5 @@
+const path = require("path");
+
 require("dotenv").config();
 require("express-async-errors");
 
@@ -17,9 +19,11 @@ const connectDb = require("./db/connect");
 const app = express();
 const port = process.env.PORT || 3000;
 const uri = process.env.MONGO_URI;
+const clientBuild = path.resolve(__dirname, "..", "..", "client", "build");
 
 // trust proxy
-app.enable("trust proxy");
+// app.enable("trust proxy");
+app.use(express.static(clientBuild));
 
 // parser
 app.use(express.json());
