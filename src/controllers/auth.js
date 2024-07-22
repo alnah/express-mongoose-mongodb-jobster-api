@@ -42,9 +42,33 @@ const login = async (req, res, next) => {
   });
 };
 
-const updateUser = (req, res) => {
-  console.log("req.user:", req.user);
-  console.log("req.body:", req.body);
+const updateUser = async (req, res) => {
+  const {
+    user: { _id: userId },
+    body: { name, email, lastName, location },
+  } = req;
+
+  if (!name || !email || !lastName || !location) {
+    throw new BadRequestError("Please provide all values");
+  }
+
+  const user = await User.findOneAndUpdate(
+    { _id: userId },
+    { name, email, lastName, location },
+    { new: true, runValidators: true }
+  );
+
+  const token = user.createJwt();
+
+  res.status(StatusCodes.OK).json({
+    user: {
+      email: user.email,
+      lastName: user.lastName,
+      location: user.location,
+      name: user.name,
+      token,
+    },
+  });
 };
 
 module.exports = { register, login, updateUser };
