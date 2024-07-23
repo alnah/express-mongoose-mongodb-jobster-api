@@ -1,7 +1,7 @@
 {
   "name": "express-mongoose-mongodb-jobs-api",
   "version": "1.0.0",
-  "description": "An Express.js app implementing a JSON web token for authentication, and using MongoDB together with Mongoose.",
+  "description": "An Express.js application providing a backend for job management with secure authentication, CRUD operations, and MongoDB integration.",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
