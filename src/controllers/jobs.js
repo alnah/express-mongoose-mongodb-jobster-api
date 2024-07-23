@@ -1,4 +1,5 @@
 const { StatusCodes } = require("http-status-codes");
+const moment = require("moment");
 
 const Job = require("../models/job");
 const { BadRequestError } = require("../errors");
@@ -101,10 +102,28 @@ const deleteJob = async (req, res, next) => {
   res.status(StatusCodes.OK).json({ job });
 };
 
-const showStats = (req, res, next) => {
-  res
-    .status(StatusCodes.OK)
-    .json({ defaultStats: {}, monthlyApplications: [] });
+const showStats = async (req, res, next) => {
+  // aggregate pending, interview and declined status
+  let stats = await Job.aggregate([
+    { $match: { createdBy: req.user._id } },
+    { $group: { _id: "$status", count: { $sum: 1 } } },
+  ]);
+
+  // reshape the data structure expexcted by the client
+  stats = stats.reduce((accumulator, current) => {
+    const { _id: title, count } = current;
+    accumulator[title] = count;
+    return accumulator;
+  }, {});
+
+  // set default stats for a new user
+  const defaultStats = {
+    pending: stats.pending || 0,
+    interview: stats.interview || 0,
+    declined: stats.declined || 0,
+  };
+
+  res.status(StatusCodes.OK).json({ defaultStats, monthlyApplications: [] });
 };
 
 module.exports = {
