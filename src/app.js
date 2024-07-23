@@ -21,7 +21,9 @@ const port = process.env.PORT || 3000;
 const uri = process.env.MONGO_URI;
 const clientBuild = path.resolve(__dirname, "..", "..", "client", "build");
 
-// trust proxy
+// enable trust proxy
+app.set("trust proxy", 1);
+
 // app.enable("trust proxy");
 app.use(express.static(clientBuild));
 
