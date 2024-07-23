@@ -12,7 +12,9 @@ const authUserMiddleware = async (req, res, next) => {
   try {
     const payload = jwt.verify(token, process.env.JWT_SECRET);
     const user = await User.findById(payload.userId).select("-password");
+    const testUser = payload.userId === "669f3e49d5f495305bb331eb";
     req.user = user;
+    req.testUser = testUser;
     next();
   } catch (error) {
     throw new UnauthenticatedError("Authentication invalid.");
