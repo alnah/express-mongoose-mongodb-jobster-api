@@ -2,7 +2,7 @@ const { StatusCodes } = require("http-status-codes");
 
 // next is used by express-async-errors
 // eslint-disable-next-line no-unused-vars
-const errorHandlerMiddleware = (err, req, res, next) => {
+const errorHandler = (err, req, res, next) => {
   // set default
   const customError = {
     statusCode: err.statusCode || StatusCodes.INTERNAL_SERVER_ERROR,
@@ -27,4 +27,4 @@ const errorHandlerMiddleware = (err, req, res, next) => {
     .json({ message: customError.message });
 };
 
-module.exports = errorHandlerMiddleware;
+module.exports = errorHandler;

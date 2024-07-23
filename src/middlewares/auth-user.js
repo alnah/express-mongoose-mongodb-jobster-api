@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 const { UnauthenticatedError } = require("../errors");
 
-const authUserMiddleware = async (req, res, next) => {
+const authUser = async (req, res, next) => {
   const authHeader = req.headers.authorization;
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
     throw new UnauthenticatedError("Authentication invalid.");
@@ -21,4 +21,4 @@ const authUserMiddleware = async (req, res, next) => {
   }
 };
 
-module.exports = authUserMiddleware;
+module.exports = authUser;

@@ -10,9 +10,9 @@ const xssClean = require("xss-clean");
 const authRoutes = require("./routes/auth");
 const jobsRoutes = require("./routes/jobs");
 
-const authUserMiddleware = require("./middlewares/auth-user");
-const routeNotFoundMiddleware = require("./middlewares/route-not-found");
-const errorHandlerMiddleware = require("./middlewares/error-handler");
+const authUser = require("./middlewares/auth-user");
+const routeNotFound = require("./middlewares/route-not-found");
+const errorHandler = require("./middlewares/error-handler");
 
 const connectDb = require("./db/connect");
 
@@ -34,7 +34,7 @@ app.use(xssClean());
 
 // routes
 app.use("/api/v1/auth", authRoutes);
-app.use("/api/v1/jobs", authUserMiddleware, jobsRoutes);
+app.use("/api/v1/jobs", authUser, jobsRoutes);
 
 // serve index.html
 app.get("*", (req, res) => {
@@ -42,8 +42,8 @@ app.get("*", (req, res) => {
 });
 
 // middlewares
-app.use(routeNotFoundMiddleware);
-app.use(errorHandlerMiddleware);
+app.use(routeNotFound);
+app.use(errorHandler);
 
 // start
 const start = async () => {
